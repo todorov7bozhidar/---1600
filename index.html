@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Галерия – 17 изображения</title>
+
+<style>
+    body {
+        margin: 0;
+        background: #f2f2f2;
+        font-family: "Segoe UI", sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .container {
+        position: relative;
+        width: 80%;
+        max-width: 900px;
+        transform: skew(-1.5deg);
+        background: white;
+        padding: 20px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.15);
+        border-radius: 15px;
+    }
+
+    iframe {
+        width: 100%;
+        height: 550px;
+        border: none;
+        border-radius: 10px;
+    }
+
+    .arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 50px;
+        font-weight: bold;
+        color: #444;
+        cursor: pointer;
+        user-select: none;
+        transition: 0.2s;
+    }
+
+    .arrow:hover {
+        color: black;
+        transform: translateY(-50%) scale(1.15);
+    }
+
+    #leftArrow {
+        left: -60px;
+    }
+
+    #rightArrow {
+        right: -60px;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <div id="leftArrow" class="arrow">&#10094;</div>
+    <iframe id="viewer" src="Из1.png"></iframe>
+    <div id="rightArrow" class="arrow">&#10095;</div>
+</div>
+
+<script>
+    let current = 1;
+    const total = 17;
+
+    function updateImage() {
+        document.getElementById("viewer").src = `Из${current}.png`;
+    }
+
+    document.getElementById("leftArrow").onclick = () => {
+        current--;
+        if (current < 1) current = total;
+        updateImage();
+    };
+
+    document.getElementById("rightArrow").onclick = () => {
+        current++;
+        if (current > total) current = 1;
+        updateImage();
+    };
+</script>
+
+</body>
+</html>
