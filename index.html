@@ -6,46 +6,66 @@
 <style>
     body {
         margin: 0;
-        font-family: Arial, sans-serif;
-        background: #e6edf7;
+        background: #7b0000; /* Царско червено */
+        font-family: "Georgia", serif;
     }
 
     .header {
-        background: #2d3e8b;
-        color: white;
+        background: linear-gradient(to right, #a30000, #7b0000);
+        color: #f8e6b7; /* светло златно */
         text-align: center;
-        padding: 20px;
-        font-size: 32px;
+        padding: 25px;
+        font-size: 36px;
         font-weight: bold;
+        border-bottom: 4px solid #d4af37;
         letter-spacing: 1px;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     }
 
     .viewer-wrapper {
-        margin: 0 auto;
-        width: 90%;
-        height: 90vh;
-        background: white;
-        border-left: 6px solid #2d3e8b; 
-        border-right: 6px solid #2d3e8b;
-        border-bottom: 20px solid #2d3e8b; /* Дебела долна част */
-        border-top: 2px solid #2d3e8b;
+        margin: 20px auto;
+        width: 92%;
+        height: 80vh;
+        background: #3a0000;
+        border: 6px solid #d4af37; /* златна рамка */
         border-radius: 14px;
-        overflow: hidden;
         display: flex;
         align-items: center;
         justify-content: center;
-        box-shadow: 0 4px 18px rgba(0,0,0,0.3);
+        position: relative;
+        box-shadow: 0 0 25px black;
     }
 
-    .image-container img {
-        max-height: 95vh;
-        max-width: 95vw;
-        transform: rotate(90deg); /* ⚠️ Изображението е обърнато хоризонтално */
-        display: block;
+    .viewer-wrapper img {
+        max-height: 95%;
+        max-width: 95%;
+        transform: rotate(90deg); /* хоризонтално изображение */
+        border-radius: 10px;
     }
 
-    /* Бутоните под рамката */
+    /* Стрелки */
+    .arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 60px;
+        color: #f8e6b7;
+        background: rgba(0, 0, 0, 0.3);
+        padding: 15px 25px;
+        border-radius: 10px;
+        cursor: pointer;
+        user-select: none;
+        transition: 0.3s;
+    }
+
+    .arrow:hover {
+        background: rgba(0, 0, 0, 0.5);
+        color: white;
+    }
+
+    #leftArrow { left: 15px; }
+    #rightArrow { right: 15px; }
+
+    /* Малките бутони отдолу */
     .thumbs {
         width: 90%;
         margin: 10px auto;
@@ -53,58 +73,70 @@
     }
 
     .thumbs button {
-        background: #2d3e8b;
-        color: white;
+        background: #d4af37;
+        color: #3a0000;
         border: none;
-        padding: 10px 16px;
-        margin: 5px;
-        border-radius: 8px;
+        padding: 10px 14px;
+        margin: 4px;
+        border-radius: 6px;
         cursor: pointer;
-        font-size: 16px;
+        font-size: 15px;
+        font-weight: bold;
         transition: 0.3s;
     }
 
     .thumbs button:hover {
-        background: #445ad1;
+        background: #f8e6b7;
+        color: black;
     }
 </style>
 
 <script>
-function loadImage(imgName) {
-    document.getElementById("mainImage").src = imgName;
+let currentImage = 1;
+const totalImages = 17;
+
+function updateImage() {
+    document.getElementById("mainImage").src = "Из" + currentImage + ".jpg";
+}
+
+function nextImage() {
+    currentImage++;
+    if (currentImage > totalImages) currentImage = 1;
+    updateImage();
+}
+
+function prevImage() {
+    currentImage--;
+    if (currentImage < 1) currentImage = totalImages;
+    updateImage();
+}
+
+function loadImage(n) {
+    currentImage = n;
+    updateImage();
 }
 </script>
 </head>
 
 <body>
 
-<div class="header">Френски абсолютизъм от XVII век</div>
+<div class="header">Френският абсолютизъм от XVII век</div>
 
 <div class="viewer-wrapper">
-    <div class="image-container">
-        <img id="mainImage" src="Из1.png">
-    </div>
+    <span class="arrow" id="leftArrow" onclick="prevImage()">&#8592;</span>
+
+    <img id="mainImage" src="Из1.jpg">
+
+    <span class="arrow" id="rightArrow" onclick="nextImage()">&#8594;</span>
 </div>
 
 <div class="thumbs">
-    <!-- Натискаш бутона → зарежда изображение в "E-frame" -->
-    <button onclick="loadImage('Из1.png')">Изображение 1</button>
-    <button onclick="loadImage('Из2.png')">Изображение 2</button>
-    <button onclick="loadImage('Из3.png')">Изображение 3</button>
-    <button onclick="loadImage('Из4.png')">4</button>
-    <button onclick="loadImage('Из5.png')">5</button>
-    <button onclick="loadImage('Из6.png')">6</button>
-    <button onclick="loadImage('Из7.png')">7</button>
-    <button onclick="loadImage('Из8.png')">8</button>
-    <button onclick="loadImage('Из9.png')">9</button>
-    <button onclick="loadImage('Из10.png')">10</button>
-    <button onclick="loadImage('Из11.png')">11</button>
-    <button onclick="loadImage('Из12.png')">12</button>
-    <button onclick="loadImage('Из13.png')">13</button>
-    <button onclick="loadImage('Из14.png')">14</button>
-    <button onclick="loadImage('Из15.png')">15</button>
-    <button onclick="loadImage('Из16.png')">16</button>
-    <button onclick="loadImage('Из17.png')">17</button>
+    <!-- Автоматично бутони 1–17 -->
+    <script>
+        for (let i = 1; i <= 17; i++) {
+            document.write('<button onclick="loadImage(' + i + ')"> ' + i + ' </button>');
+        }
+    </script>
 </div>
 
 </body>
