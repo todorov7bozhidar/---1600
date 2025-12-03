@@ -2,115 +2,110 @@
 <html lang="bg">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Френски абсолютизъм от XVII век</title>
-
 <style>
     body {
         margin: 0;
-        background: linear-gradient(135deg, #9bc5ff, #e1e7ff);
-        font-family: "Segoe UI", sans-serif;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
+        font-family: Arial, sans-serif;
+        background: #e6edf7;
     }
 
-    .wrapper {
-        width: 90%;
-        max-width: 1200px;
-        background: #ffffffdd;
-        padding: 25px;
-        border-radius: 20px;
-        backdrop-filter: blur(10px);
-        box-shadow: 0 0 40px rgba(0,0,0,0.2);
-    }
-
-    h1 {
+    .header {
+        background: #2d3e8b;
+        color: white;
         text-align: center;
-        margin-top: 0;
-        margin-bottom: 25px;
-        font-size: 36px;
+        padding: 20px;
+        font-size: 32px;
+        font-weight: bold;
         letter-spacing: 1px;
-        color: #2a2a2a;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     }
 
-    .container {
-        position: relative;
-        width: 100%;
-        transform: skew(-1deg);
+    .viewer-wrapper {
+        margin: 0 auto;
+        width: 90%;
+        height: 90vh;
         background: white;
-        padding: 0;
-        border-radius: 15px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        border-left: 6px solid #2d3e8b; 
+        border-right: 6px solid #2d3e8b;
+        border-bottom: 20px solid #2d3e8b; /* Дебела долна част */
+        border-top: 2px solid #2d3e8b;
+        border-radius: 14px;
         overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 18px rgba(0,0,0,0.3);
     }
 
-    iframe {
-        width: 100%;
-        height: 650px;
+    .image-container img {
+        max-height: 95vh;
+        max-width: 95vw;
+        transform: rotate(90deg); /* ⚠️ Изображението е обърнато хоризонтално */
+        display: block;
+    }
+
+    /* Бутоните под рамката */
+    .thumbs {
+        width: 90%;
+        margin: 10px auto;
+        text-align: center;
+    }
+
+    .thumbs button {
+        background: #2d3e8b;
+        color: white;
         border: none;
-        border-radius: 0;
-        object-fit: contain;
-    }
-
-    .arrow {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        font-size: 70px;
-        font-weight: 700;
-        color: #3b3b3b;
+        padding: 10px 16px;
+        margin: 5px;
+        border-radius: 8px;
         cursor: pointer;
-        user-select: none;
-        transition: 0.25s;
-        padding: 10px;
+        font-size: 16px;
+        transition: 0.3s;
     }
 
-    .arrow:hover {
-        color: #000;
-        transform: translateY(-50%) scale(1.15);
+    .thumbs button:hover {
+        background: #445ad1;
     }
-
-    #leftArrow { left: 10px; }
-    #rightArrow { right: 10px; }
 </style>
+
+<script>
+function loadImage(imgName) {
+    document.getElementById("mainImage").src = imgName;
+}
+</script>
 </head>
 
 <body>
 
-<div class="wrapper">
-    <h1>Френски абсолютизъм от XVII век</h1>
+<div class="header">Френски абсолютизъм от XVII век</div>
 
-    <div class="container">
-        <div id="leftArrow" class="arrow">&#10094;</div>
-
-        <iframe id="viewer" src="Из1.jpg"></iframe>
-
-        <div id="rightArrow" class="arrow">&#10095;</div>
+<div class="viewer-wrapper">
+    <div class="image-container">
+        <img id="mainImage" src="Из1.png">
     </div>
 </div>
 
-<script>
-    let current = 1;
-    const total = 17;
-
-    function updateImage() {
-        document.getElementById("viewer").src = `Из${current}.jpg`;
-    }
-
-    document.getElementById("leftArrow").onclick = () => {
-        current--;
-        if (current < 1) current = total;
-        updateImage();
-    };
-
-    document.getElementById("rightArrow").onclick = () => {
-        current++;
-        if (current > total) current = 1;
-        updateImage();
-    };
-</script>
+<div class="thumbs">
+    <!-- Натискаш бутона → зарежда изображение в "E-frame" -->
+    <button onclick="loadImage('Из1.png')">Изображение 1</button>
+    <button onclick="loadImage('Из2.png')">Изображение 2</button>
+    <button onclick="loadImage('Из3.png')">Изображение 3</button>
+    <button onclick="loadImage('Из4.png')">4</button>
+    <button onclick="loadImage('Из5.png')">5</button>
+    <button onclick="loadImage('Из6.png')">6</button>
+    <button onclick="loadImage('Из7.png')">7</button>
+    <button onclick="loadImage('Из8.png')">8</button>
+    <button onclick="loadImage('Из9.png')">9</button>
+    <button onclick="loadImage('Из10.png')">10</button>
+    <button onclick="loadImage('Из11.png')">11</button>
+    <button onclick="loadImage('Из12.png')">12</button>
+    <button onclick="loadImage('Из13.png')">13</button>
+    <button onclick="loadImage('Из14.png')">14</button>
+    <button onclick="loadImage('Из15.png')">15</button>
+    <button onclick="loadImage('Из16.png')">16</button>
+    <button onclick="loadImage('Из17.png')">17</button>
+</div>
 
 </body>
 </html>
