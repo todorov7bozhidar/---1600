@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<title>Взаимни положения на две окръжности</title>
+<style>
+    body {
+        margin: 0;
+        background: #7b0000; /* Царско червено */
+        font-family: "Georgia", serif;
+    }
+
+    .header {
+        background: linear-gradient(to right, #a30000, #7b0000);
+        color: #f8e6b7; /* светло златно */
+        text-align: center;
+        padding: 25px;
+        font-size: 36px;
+        font-weight: bold;
+        border-bottom: 4px solid #d4af37;
+        letter-spacing: 1px;
+    }
+
+    .viewer-wrapper {
+        margin: 20px auto;
+        width: 92%;
+        height: 80vh;
+        background: #3a0000;
+        border: 6px solid #d4af37; /* златна рамка */
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        box-shadow: 0 0 25px black;
+    }
+
+    .viewer-wrapper img {
+        max-height: 95%;
+        max-width: 95%;
+        transform: rotate(0deg); /* хоризонтално изображение */
+        border-radius: 10px;
+    }
+
+    /* Стрелки */
+    .arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 60px;
+        color: #f8e6b7;
+        background: rgba(0, 0, 0, 0.3);
+        padding: 15px 25px;
+        border-radius: 10px;
+        cursor: pointer;
+        user-select: none;
+        transition: 0.3s;
+    }
+
+    .arrow:hover {
+        background: rgba(0, 0, 0, 0.5);
+        color: white;
+    }
+
+    #leftArrow { left: 15px; }
+    #rightArrow { right: 15px; }
+
+    /* Малките бутони отдолу */
+    .thumbs {
+        width: 90%;
+        margin: 10px auto;
+        text-align: center;
+    }
+
+    .thumbs button {
+        background: #d4af37;
+        color: #3a0000;
+        border: none;
+        padding: 10px 14px;
+        margin: 4px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 15px;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+
+    .thumbs button:hover {
+        background: #f8e6b7;
+        color: black;
+    }
+</style>
+
+<script>
+let currentImage = 1;
+const totalImages = 13;  // Променено от 17 на 13
+
+function updateImage() {
+    document.getElementById("mainImage").src = "Мат" + currentImage + ".jpg";  // Променено от "Из"
+}
+
+function nextImage() {
+    currentImage++;
+    if (currentImage > totalImages) currentImage = 1;
+    updateImage();
+}
+
+function prevImage() {
+    currentImage--;
+    if (currentImage < 1) currentImage = totalImages;
+    updateImage();
+}
+
+function loadImage(n) {
+    currentImage = n;
+    updateImage();
+}
+</script>
+</head>
+
+<body>
+
+<div class="header">Взаимни положения на две окръжности</div>
+
+<div class="viewer-wrapper">
+    <span class="arrow" id="leftArrow" onclick="prevImage()">&#8592;</span>
+
+    <img id="mainImage" src="Мат1.jpg">  <!-- Променено от Мат1.jpg на Мат1.jpg (вече е правилно) -->
+
+    <span class="arrow" id="rightArrow" onclick="nextImage()">&#8594;</span>
+</div>
+
+<div class="thumbs">
+    <!-- Автоматично бутони 1–13 -->
+    <script>
+        for (let i = 1; i <= 13; i++) {  // Променено от 13 на 13 (вече е правилно)
+            document.write('<button onclick="loadImage(' + i + ')"> ' + i + ' </button>');
+        }
+    </script>
+</div>
+
+</body>
+</html>
